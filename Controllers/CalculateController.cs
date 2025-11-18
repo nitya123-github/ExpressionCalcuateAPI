@@ -2,23 +2,6 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-<<<<<<< HEAD
-public async Task<IActionResult> Calculate([FromBody] string expression)
-{
-if (string.IsNullOrWhiteSpace(expression))
-return BadRequest(new { error = "Expression is required in request body." });
-
-
-expression = expression.Trim();
-
-
-if (expression.Length > 500)
-return BadRequest(new { error = "Expression too long (max 500 chars)." });
-
-
-if (!AllowedExpr.IsMatch(expression))
-return BadRequest(new { error = "Expression contains invalid characters. Only digits, whitespace, parentheses and operators +-*/ . are allowed." });
-=======
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using ExpressionCalculatorAPI.Data;
