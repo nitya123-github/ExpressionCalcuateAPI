@@ -1,19 +1,30 @@
-# A .NET Core CLI template on Gitpod
+# ExpressionCalculatorAPI
 
-This is a [.NET Core CLI](https://docs.microsoft.com/en-us/dotnet/core/introduction) template configured for ephemeral cloud development environments on [Gitpod](https://www.gitpod.io/).
 
-## Next Steps
+Simple .NET 8 Web API that evaluates math expressions, stores request/response in a SQLite DB, and lets you query expressions by the result.
 
-Click the button below to start a new development environment:
 
-[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/gitpod-io/template-dotnet-core-cli-csharp)
+## Files included
+- Controllers/CalculateController.cs
+- Data/AppDbContext.cs
+- Models/ExpressionHistory.cs
+- Program.cs
+- appsettings.json
+- ExpressionCalculatorAPI.csproj
 
-## Get Started With Your Own Project
 
-### A new project
+## Run locally or in Codespaces
+1. Open in Codespaces or clone locally.
+2. Restore packages: `dotnet restore`
+3. From project folder: `dotnet run`
+4. Open Swagger at `/swagger` to test endpoints.
 
-Click the above "Open in Gitpod" button to start a new workspace. Once you're ready to push your first code changes, Gitpod will guide you to fork this project so you own it.
 
-### An existing project
+## Endpoints
+- `POST /api/calculate` — body: raw JSON string, e.g. `"3+4*6-12"`
+- `GET /api/calculate?result={value}` — returns expressions with that result
 
-To get started with .NET Core CLI on Gitpod, add a [`.gitpod.yml`](./.gitpod.yml) file which contains the configuration to improve the developer experience on Gitpod. To learn more, please see the [Getting Started](https://www.gitpod.io/docs/getting-started) documentation.
+
+## Notes
+- Uses SQLite `expressions.db` in project folder.
+- Input is validated to allow digits, whitespace, parentheses, and operators `+-*/.` only. If you need functions (sin, cos) remove validation or extend.
