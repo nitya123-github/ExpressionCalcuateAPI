@@ -3,7 +3,7 @@ using ExpressionCalculatorAPI.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
-
+// ```
 
 // Add services
 builder.Services.AddControllers();
@@ -27,12 +27,18 @@ using (var scope = app.Services.CreateScope())
 }
 
 
-// For this development environment: enable Swagger UI so the root can redirect to it.
-app.UseSwagger();
-app.UseSwaggerUI();
+// Enable Swagger only in Development to avoid exposing docs in production.
+if (app.Environment.IsDevelopment())
+{
+	app.UseSwagger();
+	app.UseSwaggerUI();
+}
 
-// Skip HTTPS redirection in the dev forwarded environment to avoid redirect issues.
-// app.UseHttpsRedirection();
+// Enable HTTPS redirection only outside of Development environments.
+if (!app.Environment.IsDevelopment())
+{
+	app.UseHttpsRedirection();
+}
 app.UseAuthorization();
 
 // Root: redirect to Swagger UI so visiting the forwarded domain shows a useful page.
